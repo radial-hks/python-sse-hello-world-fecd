@@ -32,6 +32,10 @@ async def list_supported_crs() -> str:
         "   - Web墨卡托投影示例:\n" +
         "     +proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +no_defs"
     )
+@mcp.tool()
+def add(a: int, b: int) -> int:
+    """Add two numbers"""
+    return a + b
 app = Starlette(
     routes=[
         Mount('/', app=mcp.sse_app()),
