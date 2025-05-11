@@ -32,6 +32,26 @@ async def list_supported_crs() -> str:
         "   - Web墨卡托投影示例:\n" +
         "     +proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +no_defs"
     )
+@mcp.tool(
+    name="transform_coordinates",
+    description="在不同坐标系统之间转换坐标，支持EPSG、WKT和Proj格式的坐标系统",
+)
+async def transform_coordinates(source_crs: str, target_crs: str, coordinates: List[CoordinateItem]) -> str:
+    """处理坐标转换请求"""
+    if not all([source_crs, target_crs, coordinates]):
+        # FastMCP might handle this based on schema, but explicit check is good.
+        # However, FastMCP expects the function to raise an error or return a value.
+        # For simplicity, we'll let FastMCP handle missing args based on schema if possible,
+        # or rely on the CoordinateTransformer to raise errors for invalid CRS.
+        # For now, let's assume valid inputs as per schema.
+        pass
+    try:
+        results_log = []
+        return f"坐标转换结果 (从 {} 到 {}):\n" + "\n".join(results_log)
+    except ValueError as e:
+        # FastMCP tools should ideally return a string or raise an error that FastMCP can handle.
+        # Returning an error message string is one way.
+        return f"坐标转换失败"
 app = Starlette(
     routes=[
         Mount('/', app=mcp.sse_app()),
