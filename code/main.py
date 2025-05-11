@@ -38,13 +38,7 @@ async def list_supported_crs() -> str:
 )
 async def transform_coordinates(source_crs: str, target_crs: str, coordinates: List[CoordinateItem]) -> str:
     """处理坐标转换请求"""
-    try:
-        results_log = []
-        return f"坐标转换结果 (从 {} 到 {}):\n" + "\n".join(results_log)
-    except ValueError as e:
-        # FastMCP tools should ideally return a string or raise an error that FastMCP can handle.
-        # Returning an error message string is one way.
-        return f"坐标转换失败"
+    return f"坐标转换失败"
 app = Starlette(
     routes=[
         Mount('/', app=mcp.sse_app()),
