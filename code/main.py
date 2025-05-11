@@ -38,13 +38,6 @@ async def list_supported_crs() -> str:
 )
 async def transform_coordinates(source_crs: str, target_crs: str, coordinates: List[CoordinateItem]) -> str:
     """处理坐标转换请求"""
-    if not all([source_crs, target_crs, coordinates]):
-        # FastMCP might handle this based on schema, but explicit check is good.
-        # However, FastMCP expects the function to raise an error or return a value.
-        # For simplicity, we'll let FastMCP handle missing args based on schema if possible,
-        # or rely on the CoordinateTransformer to raise errors for invalid CRS.
-        # For now, let's assume valid inputs as per schema.
-        pass
     try:
         results_log = []
         return f"坐标转换结果 (从 {} 到 {}):\n" + "\n".join(results_log)
