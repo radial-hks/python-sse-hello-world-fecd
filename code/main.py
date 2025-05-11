@@ -32,13 +32,6 @@ async def list_supported_crs() -> str:
         "   - Web墨卡托投影示例:\n" +
         "     +proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +no_defs"
     )
-@mcp.tool(
-    name="transform_coordinates",
-    description="在不同坐标系统之间转换坐标，支持EPSG、WKT和Proj格式的坐标系统",
-)
-async def transform_coordinates(source_crs: str, target_crs: str, coordinates: List[CoordinateItem]) -> str:
-    """处理坐标转换请求"""
-    return f"坐标转换失败"
 app = Starlette(
     routes=[
         Mount('/', app=mcp.sse_app()),
