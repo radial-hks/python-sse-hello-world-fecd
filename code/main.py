@@ -36,6 +36,27 @@ async def list_supported_crs() -> str:
 def add(a: int, b: int) -> int:
     """Add two numbers"""
     return a + b
+@mcp.tool(
+    name="transform_coordinates",
+    description="在不同坐标系统之间转换坐标，支持EPSG、WKT和Proj格式的坐标系统。\n注意：坐标列表不能为空。",
+)
+async def transform_coordinates(
+    source_crs: Annotated[str, Field(description='源坐标系统，支持EPSG、WKT和Proj格式，例如："EPSG:4326" 或 "+proj=longlat +datum=WGS84"')], 
+    target_crs: Annotated[str, Field(description='目标坐标系统，支持EPSG、WKT和Proj格式，例如："EPSG:3857" 或 "+proj=merc +a=6378137 +b=6378137 +lat_ts=0 +lon_0=0 +x_0=0 +y_0=0 +k=1 +units=m +no_defs"')], 
+) -> str:
+    """
+    处理坐标转换请求。
+    
+    参数:
+        source_crs: 源坐标系统。
+        target_crs: 目标坐标系统。
+        coordinates: 要转换的坐标列表，每个坐标包含x和y值。列表不能为空。
+
+    返回:
+    """
+    # transformer = CoordinateTransformer()
+   
+    return "源坐标系统{}转换为目标坐标系统{}。".format(source_crs, target_crs)
 app = Starlette(
     routes=[
         Mount('/', app=mcp.sse_app()),
