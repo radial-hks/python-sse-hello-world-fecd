@@ -3,6 +3,7 @@ from starlette.applications import Starlette
 from starlette.applications import Starlette
 from starlette.routing import Mount
 import pyproj
+import fastmcp
 
 mcp = FastMCP("My App")
 
