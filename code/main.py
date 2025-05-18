@@ -1,9 +1,9 @@
-from mcp.server.fastmcp import FastMCP
+# from mcp.server.fastmcp import FastMCP
 from starlette.applications import Starlette
 from starlette.applications import Starlette
 from starlette.routing import Mount
 import pyproj
-import fastmcp
+from fastmcp import FastMCP
 
 mcp = FastMCP("My App")
 
@@ -57,7 +57,6 @@ async def transform_coordinates(
     返回:
     """
     # transformer = CoordinateTransformer()
-   
     return "源坐标系统{}转换为目标坐标系统{}。".format(source_crs, target_crs)
 app = Starlette(
     routes=[
